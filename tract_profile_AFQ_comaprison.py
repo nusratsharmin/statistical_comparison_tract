@@ -71,9 +71,9 @@ def average_profile_calculation(sub_list):
     for sub in sub_list:
         print (sub)
         tract_filename=PATH   
-        #tract_filename= "/media/nusrat/3a7255f4-81fe-4fa7-8595-e4cdadc062a9/home/nusrat/Desktop/dataset_thesis/Mapping_Dataset/ROI/"+sub+"/NILAB_bao_cst_left.trk"
+       
         tract= load_tract(tract_filename)
-        #fa_filename="/media/nusrat/3a7255f4-81fe-4fa7-8595-e4cdadc062a9/home/nusrat/Desktop/dataset_thesis_new/Nifti/"+sub+"/MP_Rage_1x1x1_ND_3/T1_flirt_out.nii.gz"
+        
         fa_filename=PATH
         FA_data= load_fa(fa_filename)
         profile= tract_profile(tract, FA_data) 
