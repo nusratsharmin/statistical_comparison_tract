@@ -115,8 +115,8 @@ class MainWindow(Qt.QMainWindow):
         global fileName_trk 
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
-        fileName, _ = QFileDialog.getOpenFileName(self,"QFileDialog.getOpenFileName()", "","Track Files (*.trk)", options=options)
-        if fileName:
+        fileName_trk , _ = QFileDialog.getOpenFileName(self,"QFileDialog.getOpenFileName()", "","Track Files (*.trk)", options=options)
+        if fileName_trk:
              self.load_streamline(fileName_trk)
            
    
@@ -129,15 +129,15 @@ class MainWindow(Qt.QMainWindow):
              self.load_streamline(fileName_fa)         
        
  
-    def load_streamline(self,fileName):
-        print(fileName)
+    def load_streamline(self,fileName_trk):
+        print(fileName_trk)
         global wholeTract
         from fury import window
         scene = window.Scene()
         
         affine=utils.affine_for_trackvis(voxel_size=np.array([1.25,1.25,1.25]))
 
-        wholeTract= nib.streamlines.load(fileName)
+        wholeTract= nib.streamlines.load(fileName_trk)
         wholeTract = wholeTract.streamlines        
         wholeTract_transform = transform_streamlines(wholeTract, np.linalg.inv(affine))
         stream_actor = actor.line(wholeTract_transform)
@@ -180,5 +180,7 @@ if __name__ == "__main__":
     
     window = MainWindow()
     
+    
+    sys.exit(app.exec_())
     
     sys.exit(app.exec_())
